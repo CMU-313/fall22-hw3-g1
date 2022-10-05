@@ -21,5 +21,9 @@ public enum ActionType {
      */
     PROCESS_FILES,
 
+
+    /**
+     * Assign score to a document.
+     */
     SCORE
 }
