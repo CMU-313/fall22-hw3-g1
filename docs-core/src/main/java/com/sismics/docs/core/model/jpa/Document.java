@@ -52,6 +52,12 @@ public class Document implements Loggable {
      */
     @Column(name = "DOC_DESCRIPTION_C", length = 4000)
     private String description;
+
+    /**
+     * Score.
+     */
+    @Column(name = "DOC_SCORE_I", length = 4000)
+    private int score;
     
     /**
      * Subject.
@@ -190,6 +196,14 @@ public class Document implements Loggable {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public String getFormat() {
