@@ -198,6 +198,8 @@ public class RouteResource extends BaseResource {
                         JsonArray actions = transition.getJsonArray("actions");
                         for (int j = 0; j < actions.size(); j++) {
                             JsonObject action = actions.getJsonObject(j);
+                            
+                            action.put("comment", Json.createValue(comment));
                             ActionType actionType = ActionType.valueOf(action.getString("type"));
                             ActionUtil.executeAction(actionType, action, documentDto);
                         }
