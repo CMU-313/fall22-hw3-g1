@@ -31,7 +31,7 @@ public class ScoreAction implements Action {
     @Override
     public void execute(DocumentDto documentDto, JsonObject action) {
         try {
-            documentDto.setScoresum(documentDto.getScoresum() + Integer.parseInt(action.getString("score")));
+            documentDto.setScoresum(documentDto.getScoresum() + Integer.parseInt(action.getString("comment_score")));
             documentDto.setScorecount(documentDto.getScorecount() + 1);
 
         } catch (Exception e) {
