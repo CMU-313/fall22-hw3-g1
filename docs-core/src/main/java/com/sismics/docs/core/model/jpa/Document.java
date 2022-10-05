@@ -56,13 +56,13 @@ public class Document implements Loggable {
     /**
      * ScoreSum.
      */
-    @Column(name = "DOC_SCORESUM_C", length = 4000)
+    @Column(name = "DOC_SCORESUM_C")
     private Integer scoresum;
 
     /**
      * ScoreCount.
      */
-    @Column(name = "DOC_SCORECOUNT_C", length = 4000)
+    @Column(name = "DOC_SCORECOUNT_C")
     private Integer scorecount;
     
     /**
