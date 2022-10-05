@@ -78,6 +78,8 @@ public class TestDocumentResource extends BaseJerseyTest {
                         .param("tags", tag1Id)
                         .param("tags", tag2Id)
                         .param("language", "eng")
+                        .param("scoresum", "1")
+                        .param("scorecount", "1")
                         .param("create_date", Long.toString(create1Date))), JsonObject.class);
         String document1Id = json.getString("id");
         Assert.assertNotNull(document1Id);
@@ -236,6 +238,8 @@ public class TestDocumentResource extends BaseJerseyTest {
         Assert.assertEquals(document1Id, json.getString("id"));
         Assert.assertEquals("document1", json.getString("creator"));
         Assert.assertEquals(1, json.getInt("file_count"));
+        Assert.assertEquals(1, json.getInt("scoresum"));
+        Assert.assertEquals(1, json.getInt("scorecount"));
         Assert.assertTrue(json.getBoolean("shared"));
         Assert.assertEquals("My super title document 1", json.getString("title"));
         Assert.assertEquals("My super description for document 1", json.getString("description"));

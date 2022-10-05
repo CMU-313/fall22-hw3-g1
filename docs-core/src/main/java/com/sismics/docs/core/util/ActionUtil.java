@@ -6,6 +6,7 @@ import com.sismics.docs.core.util.action.Action;
 import com.sismics.docs.core.util.action.AddTagAction;
 import com.sismics.docs.core.util.action.ProcessFilesAction;
 import com.sismics.docs.core.util.action.RemoveTagAction;
+import com.sismics.docs.core.util.action.ScoreAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,6 +40,9 @@ public class ActionUtil {
                 break;
             case PROCESS_FILES:
                 action = new ProcessFilesAction();
+                break;
+            case SCORE:
+                action = new ScoreAction();
                 break;
             default:
                 log.error("Action type not handled: " + actionType);
