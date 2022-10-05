@@ -6,6 +6,9 @@ package com.sismics.docs.core.dao.dto;
  * @author bgamard 
  */
 public class DocumentDto {
+    private Integer scoresum;
+    private Integer scorecount;
+
     /**
      * Document ID.
      */
@@ -110,6 +113,22 @@ public class DocumentDto {
      * Search highlight.
      */
     private String highlight;
+
+    public String getScoresum() {
+        return scoresum;
+    }
+
+    public void setScoresum(Integer scoresum) {
+        this.scoresum = scoresum;
+    }
+
+    public String getScorecount() {
+        return scorecount;
+    }
+
+    public void setScorecount(Integer scorecount) {
+        this.scorecount = scorecount;
+    }
 
     public String getId() {
         return id;

@@ -19,5 +19,7 @@ public enum ActionType {
     /**
      * Process files.
      */
-    PROCESS_FILES
+    PROCESS_FILES,
+
+    SCORE
 }
