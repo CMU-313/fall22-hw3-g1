@@ -48,10 +48,12 @@
                     <span class="input-group-addon">
                       <span class="fas fa-exchange-alt" ng-if="step.type == 'APPROVE'"></span>
                       <span class="fas fa-check-circle" ng-if="step.type == 'VALIDATE'"></span>
+                      <span class="fas fa-pencil-alt" ng-if="step.type == 'SCORE'"></span>
                     </span>
                     <select class="form-control" name="type-{{ $index }}" ng-model="step.type" ng-change="updateTransitions(step)" required>
                       <option value="APPROVE">{{ 'settings.workflow.edit.type_approve' | translate }}</option>
                       <option value="VALIDATE">{{ 'settings.workflow.edit.type_validate' | translate }}</option>
+                      <option value="SCORE">{{ 'settings.workflow.edit.type_score' | translate }}</option>
                     </select>
                   </div>
                 </div>
@@ -105,6 +107,9 @@
                           <option ng-repeat="tag in tags" value="{{ tag.id }}">{{ tag.name }}</option>
                         </select>
                       </div>
+                      <div ng-switch-when="SCORE">
+                          
+                      </div>
                     </div>
                     <p class="text-center">
                       <a href ng-click="removeAction(transition.actions, action)">
@@ -117,6 +122,7 @@
                       <option value="ADD_TAG">{{ 'action_type.ADD_TAG' | translate }}</option>
                       <option value="REMOVE_TAG">{{ 'action_type.REMOVE_TAG' | translate }}</option>
                       <option value="PROCESS_FILES">{{ 'action_type.PROCESS_FILES' | translate }}</option>
+                      <option value="SCORE">{{ 'action_type.SCORE' | translate }}</option>
                     </select>
                     <span class="input-group-addon btn" ng-click="addAction(transition)">
                       <span class="fas fa-plus-circle"></span>
