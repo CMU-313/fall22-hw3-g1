@@ -114,7 +114,7 @@ public class DocumentDto {
      */
     private String highlight;
 
-    public String getScoresum() {
+    public Integer getScoresum() {
         return scoresum;
     }
 
@@ -122,7 +122,7 @@ public class DocumentDto {
         this.scoresum = scoresum;
     }
 
-    public String getScorecount() {
+    public Integer getScorecount() {
         return scorecount;
     }
 
