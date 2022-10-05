@@ -57,13 +57,13 @@ public class Document implements Loggable {
      * ScoreSum.
      */
     @Column(name = "DOC_SCORESUM_C", length = 4000)
-    private int scoresum;
+    private Integer scoresum;
 
     /**
      * ScoreCount.
      */
     @Column(name = "DOC_SCORECOUNT_C", length = 4000)
-    private int scorecount;
+    private Integer scorecount;
     
     /**
      * Subject.
@@ -204,19 +204,19 @@ public class Document implements Loggable {
         this.publisher = publisher;
     }
 
-    public int getScoresum() {
+    public Integer getScoresum() {
         return scoresum;
     }
 
-    public void setScoresum(int scoresum) {
+    public void setScoresum(Integer scoresum) {
         this.scoresum = scoresum;
     }
 
-    public int getScorecount() {
+    public Integer getScorecount() {
         return scorecount;
     }
 
-    public void setScorecount(int scorecount) {
+    public void setScorecount(Integer scorecount) {
         this.scorecount = scorecount;
     }
 
