@@ -58,6 +58,7 @@
     <td>
       <span class="fas fa-exchange-alt" ng-if="step.type == 'APPROVE'"></span>
       <span class="fas fa-check-circle" ng-if="step.type == 'VALIDATE'"></span>
+      <span class="fas fa-pencil-square" ng-if="document.route_step.type == 'SCORE'"></span>
       {{ 'workflow_type.' + step.type | translate }}
     </td>
     <td>{{ step.name }}</td>
@@ -71,7 +72,7 @@
           by
         <a href="#/user/{{ step.validator_username }}" class="label label-default">{{ step.validator_username }}</a>
         <span ng-show="step.comment" class="text-">
-          <br/><em>{{ step.comment }}</em>
+          <br/><em ng-if="document.route_step.type == 'SCORE'">Score: </em><em>{{ step.comment }}</em>
         </span>
       </span>
     </td>
