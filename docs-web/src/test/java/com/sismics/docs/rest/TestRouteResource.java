@@ -310,7 +310,6 @@ public class TestRouteResource extends BaseJerseyTest {
                 .cookie(TokenBasedSecurityFilter.COOKIE_NAME, adminToken)
                 .get(JsonObject.class);
         documents = json.getJsonArray("documents");
-        System.out.println(documents);
         Assert.assertEquals(1, documents.size());
         Assert.assertTrue(documents.getJsonObject(0).getBoolean("active_route"));
 
@@ -388,7 +387,7 @@ public class TestRouteResource extends BaseJerseyTest {
                 .cookie(TokenBasedSecurityFilter.COOKIE_NAME, adminToken)
                 .put(Entity.form(new Form()
                         .param("name", "Workflow action 1")
-                        .param("steps", "[{\"type\":\"APPROVE\",\"transitions\":[{\"name\":\"APPROVED\",\"actions\":[{\"type\":\"ADD_TAG\",\"tag\":\"" + tagApprovedId + "\"}]},{\"name\":\"REJECTED\",\"actions\":[]}],\"target\":{\"name\":\"administrators\",\"type\":\"GROUP\"},\"name\":\"Check the document's metadata\"},{\"type\":\"VALIDATE\",\"transitions\":[{\"name\":\"VALIDATED\",\"actions\":[{\"type\":\"REMOVE_TAG\",\"tag\":\"" + tagPendingId + "\"}]}],\"target\":{\"name\":\"administrators\",\"type\":\"GROUP\"},\"name\":\"Check the document's metadata\"}],{\"type\":\"SCORE\",\"transitions\":[{\"name\":\"SCORED\",\"actions\":[{\"type\":\"SCORE\"}]}],\"target\":{\"name\":\"administrators\",\"type\":\"GROUP\"},\"name\":\"Check the document's metadata\"}]")), JsonObject.class);
+                        .param("steps", "[{\"type\":\"APPROVE\",\"transitions\":[{\"name\":\"APPROVED\",\"actions\":[{\"type\":\"ADD_TAG\",\"tag\":\"" + tagApprovedId + "\"}]},{\"name\":\"REJECTED\",\"actions\":[]}],\"target\":{\"name\":\"administrators\",\"type\":\"GROUP\"},\"name\":\"Check the document's metadata\"},{\"type\":\"VALIDATE\",\"transitions\":[{\"name\":\"VALIDATED\",\"actions\":[{\"type\":\"REMOVE_TAG\",\"tag\":\"" + tagPendingId + "\"}]}],\"target\":{\"name\":\"administrators\",\"type\":\"GROUP\"},\"name\":\"Check the document's metadata\"}]")), JsonObject.class);
         String routeModelId = json.getString("id");
 
         // Create a document
@@ -449,13 +448,6 @@ public class TestRouteResource extends BaseJerseyTest {
         Assert.assertEquals(1, tags.size());
         Assert.assertEquals(tagApprovedId, tags.getJsonObject(0).getString("id"));
 
-        // Validate the current step with admin
-        target().path("/route/validate").request()
-                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, adminToken)
-                .post(Entity.form(new Form()
-                        .param("documentId", document1Id)
-                        .param("transition", "SCORED")), JsonObject.class);
-
         // Create a document
         json = target().path("/document").request()
                 .cookie(TokenBasedSecurityFilter.COOKIE_NAME, adminToken)
@@ -502,13 +494,6 @@ public class TestRouteResource extends BaseJerseyTest {
                 .get(JsonObject.class);
         tags = json.getJsonArray("tags");
         Assert.assertEquals(0, tags.size());
-
-        // Validate the current step with admin
-        target().path("/route/validate").request()
-                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, adminToken)
-                .post(Entity.form(new Form()
-                        .param("documentId", document2Id)
-                        .param("transition", "SCORED")), JsonObject.class);
 
         // Delete the documents
         target().path("/document/" + document1Id)

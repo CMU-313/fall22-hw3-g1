@@ -198,8 +198,9 @@ public class RouteResource extends BaseResource {
                         JsonArray actions = transition.getJsonArray("actions");
                         for (int j = 0; j < actions.size(); j++) {
                             JsonObject action = actions.getJsonObject(j);
+                            
                             JsonPatch patch = Json.createPatchBuilder()
-                                    .add("/comment",comment)
+                                    .add("/comment", (comment != null) ? comment : "")
                                     .build();
                             action = patch.apply(action);
                             ActionType actionType = ActionType.valueOf(action.getString("type"));
