@@ -93,6 +93,8 @@ public class DocumentResource extends BaseResource {
                 .add("title", title)
                 .add("description", description)
                 .add("language", language)
+                .add("scoresum", 0)
+                .add("scorecount", 0)
                 .add("create_date", Long.toString(createDate));
         for( String tagId : tagIdList) {
             formBuilder.add("tags", tagId);

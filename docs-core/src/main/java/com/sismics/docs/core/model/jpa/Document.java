@@ -52,6 +52,18 @@ public class Document implements Loggable {
      */
     @Column(name = "DOC_DESCRIPTION_C", length = 4000)
     private String description;
+
+    /**
+     * ScoreSum.
+     */
+    @Column(name = "DOC_SCORESUM_C")
+    private Integer scoresum;
+
+    /**
+     * ScoreCount.
+     */
+    @Column(name = "DOC_SCORECOUNT_C")
+    private Integer scorecount;
     
     /**
      * Subject.
