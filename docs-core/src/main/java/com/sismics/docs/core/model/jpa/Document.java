@@ -204,22 +204,6 @@ public class Document implements Loggable {
         this.publisher = publisher;
     }
 
-    public Integer getScoresum() {
-        return scoresum;
-    }
-
-    public void setScoresum(Integer scoresum) {
-        this.scoresum = scoresum;
-    }
-
-    public Integer getScorecount() {
-        return scorecount;
-    }
-
-    public void setScorecount(Integer scorecount) {
-        this.scorecount = scorecount;
-    }
-
     public String getFormat() {
         return format;
     }
