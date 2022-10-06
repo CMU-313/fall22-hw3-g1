@@ -142,6 +142,12 @@ angular.module('docs').controller('SettingsWorkflowEdit', function($scope, $dial
         actions: [],
         actionType: 'ADD_TAG'
       }];
+    } else if (step.type === 'SCORE') {
+      step.transitions = [{
+        name: 'SCORED',
+        actions: [],
+        actionType: 'SCORE'
+      }];
     }
   };
 
