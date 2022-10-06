@@ -45,7 +45,7 @@ public class RouteStepValidateAsyncListener {
             paramRootMap.put("document_id", event.getDocument().getId());
             paramRootMap.put("document_title", event.getDocument().getTitle());
 
-            EmailUtil.sendEmail(Constants.EMAIL_TEMPLATE_ROUTE_STEP_VALIDATE, user, paramRootMap);
+            // EmailUtil.sendEmail(Constants.EMAIL_TEMPLATE_ROUTE_STEP_VALIDATE, user, paramRootMap);
         });
     }
 }
