@@ -209,11 +209,6 @@ public class RouteModelResource extends BaseResource {
                     }
                     transitionsNames.add(RouteStepTransition.APPROVED);
                     transitionsNames.add(RouteStepTransition.REJECTED);
-                } else if (type == RouteStepType.SCORE) {
-                    if (transitions.size() != 1) {
-                        throw new ClientException("ValidationError", "SCORE steps should have one transition");
-                    }
-                    transitionsNames.add(RouteStepTransition.SCORED);
                 }
 
                 for (int j = 0; j < transitions.size(); j++) {

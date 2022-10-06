@@ -1798,9 +1798,6 @@ readers do not read off random characters that represent icons */
 .fa-pencil-alt:before {
   content: "\f303"; }
 
-.fa-pencil-square:before {
-  content: "\f14b"; }
-
 .fa-percent:before {
   content: "\f295"; }
 

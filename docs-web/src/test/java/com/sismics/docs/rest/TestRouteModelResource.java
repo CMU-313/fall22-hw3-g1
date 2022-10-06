@@ -122,22 +122,6 @@ public class TestRouteModelResource extends BaseJerseyTest {
         Assert.assertEquals("Workflow validation 2", json.getString("name"));
         Assert.assertEquals("[{\"type\":\"APPROVE\",\"transitions\":[{\"name\":\"APPROVED\",\"actions\":[{\"type\":\"ADD_TAG\",\"tag\":\"" + tagRouteId + "\"}]},{\"name\":\"REJECTED\",\"actions\":[]}],\"target\":{\"name\":\"administrators\",\"type\":\"GROUP\"},\"name\":\"Check the document's metadata\"}]", json.getString("steps"));
 
-        // Update the route model with SCORE action
-        target().path("/routemodel/" + routeModelId).request()
-                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, adminToken)
-                .post(Entity.form(new Form()
-                        .param("name", "Workflow validation 3")
-                        .param("steps", "[{\"type\":\"SCORE\",\"transitions\":[{\"name\":\"SCORED\",\"actions\":[]}],\"target\":{\"name\":\"administrators\",\"type\":\"GROUP\"},\"name\":\"Check the document's metadata\"}]")), JsonObject.class);
-
-        // Get the route model
-        json = target().path("/routemodel/" + routeModelId)
-                .request()
-                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, adminToken)
-                .get(JsonObject.class);
-        Assert.assertEquals(routeModelId, json.getString("id"));
-        Assert.assertEquals("Workflow validation 3", json.getString("name"));
-        Assert.assertEquals("[{\"type\":\"SCORE\",\"transitions\":[{\"name\":\"SCORED\",\"actions\":[]}],\"target\":{\"name\":\"administrators\",\"type\":\"GROUP\"},\"name\":\"Check the document's metadata\"}]", json.getString("steps"));
-
         // Delete the route model
         target().path("/routemodel/" + routeModelId)
                 .request()

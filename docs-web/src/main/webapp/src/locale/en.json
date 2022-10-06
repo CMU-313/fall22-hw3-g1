@@ -104,7 +104,7 @@
       "add_comment": "Add a comment",
       "error_loading_comments": "Error loading comments",
       "workflow_current": "Current workflow step",
-      "workflow_comment": "Enter text...",
+      "workflow_comment": "Add a workflow comment",
       "workflow_validated_title": "Workflow step validated",
       "workflow_validated_message": "The workflow step has been successfully validated.",
       "content": {
@@ -341,7 +341,6 @@
         "type": "Step type",
         "type_approve": "Approve",
         "type_validate": "Validate",
-        "type_score": "Score",
         "target": "Assigned to",
         "target_help": "<strong>Approve:</strong> Accept or reject the review<br/><strong>Validate:</strong> Review and continue the workflow",
         "add_step": "Add a workflow step",
@@ -566,14 +565,12 @@
   },
   "workflow_type": {
     "VALIDATE": "Validation",
-    "APPROVE": "Approbation",
-    "SCORE": "Score"
+    "APPROVE": "Approbation"
   },
   "workflow_transition": {
     "APPROVED": "Approved",
     "REJECTED": "Rejected",
-    "VALIDATED": "Validated",
-    "SCORED": "Scored"
+    "VALIDATED": "Validated"
   },
   "validation": {
     "required": "Required",
@@ -588,8 +585,7 @@
   "action_type": {
     "ADD_TAG": "Add a tag",
     "REMOVE_TAG": "Remove a tag",
-    "PROCESS_FILES": "Process files",
-    "SCORE": "Score"
+    "PROCESS_FILES": "Process files"
   },
   "pagination": {
     "previous": "Previous",
