@@ -310,6 +310,7 @@ public class TestRouteResource extends BaseJerseyTest {
                 .cookie(TokenBasedSecurityFilter.COOKIE_NAME, adminToken)
                 .get(JsonObject.class);
         documents = json.getJsonArray("documents");
+        System.out.println(documents);
         Assert.assertEquals(1, documents.size());
         Assert.assertTrue(documents.getJsonObject(0).getBoolean("active_route"));
 
