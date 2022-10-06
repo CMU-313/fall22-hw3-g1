@@ -14,12 +14,5 @@ public enum RouteStepType {
     /**
      * Simple validation step, no possible choice.
      */
-    VALIDATE,
-
-    /**
-     * Set numerical score value.
-     */
-    SCORE
-
-
+    VALIDATE
 }

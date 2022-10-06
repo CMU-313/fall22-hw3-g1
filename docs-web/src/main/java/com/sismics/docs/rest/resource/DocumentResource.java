@@ -173,9 +173,7 @@ public class DocumentResource extends BaseResource {
                 .add("update_date", documentDto.getUpdateTimestamp())
                 .add("language", documentDto.getLanguage())
                 .add("shared", documentDto.getShared())
-                .add("file_count", documentDto.getFileCount())
-                .add("scoresum", documentDto.getScoresum())
-                .add("scorecount", documentDto.getScorecount());
+                .add("file_count", documentDto.getFileCount());
 
         List<TagDto> tagDtoList = null;
         if (principal.isAnonymous()) {

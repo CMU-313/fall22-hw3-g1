@@ -78,8 +78,6 @@ public class TestDocumentResource extends BaseJerseyTest {
                         .param("tags", tag1Id)
                         .param("tags", tag2Id)
                         .param("language", "eng")
-                        .param("scoresum", "0")
-                        .param("scorecount", "0")
                         .param("create_date", Long.toString(create1Date))), JsonObject.class);
         String document1Id = json.getString("id");
         Assert.assertNotNull(document1Id);
@@ -238,8 +236,6 @@ public class TestDocumentResource extends BaseJerseyTest {
         Assert.assertEquals(document1Id, json.getString("id"));
         Assert.assertEquals("document1", json.getString("creator"));
         Assert.assertEquals(1, json.getInt("file_count"));
-        Assert.assertEquals(0, json.getInt("scoresum"));
-        Assert.assertEquals(0, json.getInt("scorecount"));
         Assert.assertTrue(json.getBoolean("shared"));
         Assert.assertEquals("My super title document 1", json.getString("title"));
         Assert.assertEquals("My super description for document 1", json.getString("description"));
@@ -655,52 +651,50 @@ public class TestDocumentResource extends BaseJerseyTest {
      *
      * @throws Exception e
      */
+    @Test
+    public void testVideoExtraction() throws Exception {
+        // Login document_video
+        clientUtil.createUser("document_video");
+        String documentVideoToken = clientUtil.login("document_video");
 
-     // COMMENTING THIS TEST OUT BECAUSE IT THROWS AN ERROR ON MAIN, UNRELATED TO OUR CHANGES
-//     @Test
-//     public void testVideoExtraction() throws Exception {
-//         // Login document_video
-//         clientUtil.createUser("document_video");
-//         String documentVideoToken = clientUtil.login("document_video");
+        // Create a document
+        String document1Id = clientUtil.createDocument(documentVideoToken);
 
-//         // Create a document
-//         String document1Id = clientUtil.createDocument(documentVideoToken);
+        // Add a video file
+        String file1Id = clientUtil.addFileToDocument(FILE_VIDEO_WEBM, documentVideoToken, document1Id);
 
-//         // Add a video file
-//         String file1Id = clientUtil.addFileToDocument(FILE_VIDEO_WEBM, documentVideoToken, document1Id);
+        // Search documents by query in full content
+        JsonObject json = target().path("/document/list")
+                .queryParam("search", "full:vp9")
+                .request()
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, documentVideoToken)
+                .get(JsonObject.class);
+        Assert.assertEquals(1, json.getJsonArray("documents").size());
 
-//         // Search documents by query in full content
-//         JsonObject json = target().path("/document/list")
-//                 .queryParam("search", "full:vp9")
-//                 .request()
-//                 .cookie(TokenBasedSecurityFilter.COOKIE_NAME, documentVideoToken)
-//                 .get(JsonObject.class);
-//         Assert.assertEquals(1, json.getJsonArray("documents").size());
+        // Get the file thumbnail data
+        Response response = target().path("/file/" + file1Id + "/data")
+                .queryParam("size", "thumb")
+                .request()
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, documentVideoToken)
+                .get();
+        InputStream is = (InputStream) response.getEntity();
+        byte[] fileBytes = ByteStreams.toByteArray(is);
+        Assert.assertTrue(fileBytes.length > 0); // Images rendered from PDF differ in size from OS to OS due to font issues
 
-//         // Get the file thumbnail data
-//         Response response = target().path("/file/" + file1Id + "/data")
-//                 .queryParam("size", "thumb")
-//                 .request()
-//                 .cookie(TokenBasedSecurityFilter.COOKIE_NAME, documentVideoToken)
-//                 .get();
-//         InputStream is = (InputStream) response.getEntity();
-//         byte[] fileBytes = ByteStreams.toByteArray(is);
-//         Assert.assertTrue(fileBytes.length > 0); // Images rendered from PDF differ in size from OS to OS due to font issues
-
-//         // Export a document in PDF format
-//         response = target().path("/document/" + document1Id + "/pdf")
-//                 .queryParam("margin", "10")
-//                 .queryParam("metadata", "true")
-//                 .queryParam("comments", "true")
-//                 .queryParam("fitimagetopage", "true")
-//                 .request()
-//                 .cookie(TokenBasedSecurityFilter.COOKIE_NAME, documentVideoToken)
-//                 .get();
-//         Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
-//         is = (InputStream) response.getEntity();
-//         byte[] pdfBytes = ByteStreams.toByteArray(is);
-//         Assert.assertTrue(pdfBytes.length > 0);
-//     }
+        // Export a document in PDF format
+        response = target().path("/document/" + document1Id + "/pdf")
+                .queryParam("margin", "10")
+                .queryParam("metadata", "true")
+                .queryParam("comments", "true")
+                .queryParam("fitimagetopage", "true")
+                .request()
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, documentVideoToken)
+                .get();
+        Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
+        is = (InputStream) response.getEntity();
+        byte[] pdfBytes = ByteStreams.toByteArray(is);
+        Assert.assertTrue(pdfBytes.length > 0);
+    }
 
     /**
      * Test PPTX extraction.
