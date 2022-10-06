@@ -104,7 +104,7 @@
       "add_comment": "Add a comment",
       "error_loading_comments": "Error loading comments",
       "workflow_current": "Current workflow step",
-      "workflow_comment": "Add a workflow comment",
+      "workflow_comment": "Enter text...",
       "workflow_validated_title": "Workflow step validated",
       "workflow_validated_message": "The workflow step has been successfully validated.",
       "content": {
@@ -566,7 +566,8 @@
   },
   "workflow_type": {
     "VALIDATE": "Validation",
-    "APPROVE": "Approbation"
+    "APPROVE": "Approbation",
+    "SCORE": "Score"
   },
   "workflow_transition": {
     "APPROVED": "Approved",
